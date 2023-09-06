@@ -1,0 +1,90 @@
+ 14 changes: 5 additions & 9 deletions 14
+src/App.js
+@@ -1,4 +1,4 @@
+import "Your code here";
+import { formatTime } from "./formatTime";
+import useTimer from "./useTimer";
+
+function App() {
+@@ -9,20 +9,16 @@ function App() {
+      <h1>Coder Timer</h1>
+      <div className="timer__wrapper">
+        <div className="timer__display">
+          <p>{"Your code here"}</p>
+          <p>{formatTime(time)}</p>
+        </div>
+        <div className="button__wrapper">
+          <button className="button" onClick={"Your code here"}>
+          <button className="button" onClick={stopTimer}>
+            Stop
+          </button>
+          <button
+            className="button"
+            ref={"Your code here"}
+            onClick={"Your code here"}
+          >
+          <button className="button" ref={active} onClick={startTimer}>
+            Start
+          </button>
+          <button className="button" onClick={"Your code here"}>
+          <button className="button" onClick={resetTimer}>
+            Reset
+          </button>
+        </div>
+8 changes: 4 additions & 4 deletions 8
+src/formatTime.js
+@@ -1,8 +1,8 @@
+export const formatTime = (time) => {
+  const getSeconds = "Your code here";
+  const minutes = "Your code here";
+  const getMinutes = "Your code here";
+  const getHours = "Your code here";
+  const getSeconds = `0${time % 60}`.slice(-2);
+  const minutes = `${Math.floor(time / 60)}`;
+  const getMinutes = `0${minutes % 60}`.slice(-2);
+  const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
+
+  return `${getHours} : ${getMinutes} : ${getSeconds}`;
+};
+22 changes: 15 additions & 7 deletions 22
+src/useTimer.js
+@@ -1,21 +1,29 @@
+import { useState, useRef } from "react";
+
+const useTimer = (ini = 0) => {
+  const [time, setTime] = "Your code here";
+  const [time, setTime] = useState(0);
+
+  const isStart = "Your code here";
+  const active = "Your code here";
+  const refInterval = "Your code here";
+  const isStart = useRef(true);
+  const active = useRef();
+  const refInterval = useRef(0);
+
+  const startTimer = () => {
+    "Your code here";
+    active.current.disabled = true;
+    isStart.current = true;
+    refInterval.current = setInterval(() => {
+      if (isStart.current) {
+        setTime((time) => time + 1);
+      }
+    }, 1000);
+  };
+  const stopTimer = () => {
+    "Your code here";
+    isStart.current = false;
+    clearInterval(refInterval.current);
+    active.current.disabled = false;
+  };
+  const resetTimer = () => {
+    "Your code here";
+    setTime(0);
+    clearInterval(refInterval.current);
+    active.current.disabled = false;
+  };
+
+  return { time, startTimer, stopTimer, resetTimer, active };
+};
+export default useTimer;
